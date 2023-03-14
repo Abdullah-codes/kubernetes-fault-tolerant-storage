@@ -8,8 +8,8 @@ And use Longhorn for Sorage solution.
 
 - 8Gb of RAM minimum
 - 2.4GHz processor or higher
-- Virtual Box - Virtualization software.
-- Vagrant - Virtual machine management tool.
+- Virtual Box - Version 7.0.6.
+- Vagrant - 2.3.2.
 
 To install virtualbox visit the following link.
 
@@ -30,7 +30,7 @@ sudo apt install ./vagrant_2.2.9_x86_64.deb
 Go to the directory where you have this files and run the command.
 
 ```
-Vagrant up
+vagrant up
 ```
 
 This proccess will take a while (5 mins) to complete depending on your internet connection speed.
@@ -43,7 +43,7 @@ Here vagrant will provision 4 VM on vitrualbox. Below is overview of Vagrant up 
 4. `worker.sh` this script contains token to join the cluster. VM's Worker1,worker2,worker3 will join the master as a worker node using this script.
 
 
-after this step you can ssh into master(control plane)vagrant using following command.
+After this step you can ssh into master(control plane)vagrant using following command.
 
 ```
 vagrant ssh master
@@ -124,7 +124,7 @@ Now we will access the UI and create the volume with 3 replicas so all 3 worker 
 After creating the volume we can see it in the cluster as well.
 
 ```
-kubect get volume -A
+kubectl get volume -A
 ```
 
 And in the UI you should be able to see worker's with replicas : 
@@ -194,7 +194,7 @@ spec:
 ```
 This statefulset will create Nginx pod and mount the volume which we have created earlier in to the pod.
 
-we will create an file in the pod data. so whenever pod goes down or fails kubernetes will create new pod and attach this volume to the pod and we will not see any data loss.
+We will create an file in the pod data. So whenever pod goes down or fails kubernetes will create new pod and attach this volume to the pod and we will not see any data loss.
 
 ```
 kubectl exec -it my-statefulset-0 bash
